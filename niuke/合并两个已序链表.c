@@ -55,17 +55,20 @@ ListNode* Merge(ListNode* pHead1,ListNode* pHead2){
 //递归合成新链表
 ListNode* Merge1(ListNode* pHead1, ListNode* pHead2)
 {
-    if (NULL == pHead1 && NULL == pHead2)
-        return NULL;
-    if (NULL == pHead1)
-        return pHead2;
-    if (NULL == pHead2)
-        return pHead1;
-    ListNode* pNewHead = new ListNode(0);
-    while (pHead1&&pHead2){
-        if (pHead1->val<pHead2->val){
-            pNewHead->val = pHead1->val;
-            pNewHead->next=
-        }
-    }
+	if (NULL == pHead1 && NULL == pHead2)
+		return NULL;
+	if (NULL == pHead1)
+		return pHead2;
+	if (NULL == pHead2)
+		return pHead1;
+	ListNode* pNewHead = NULL;
+	if (pHead1->m_nValue < pHead2->m_nValue){
+		pNewHead = pHead1;
+		pNewHead->m_pNext = Merge1(pHead1->m_pNext, pHead2);
+	}
+	else{
+		pNewHead = pHead2;
+		pNewHead->m_pNext = Merge1(pHead1, pHead2->m_pNext);
+	}
+	return pNewHead;
 }
